@@ -1,0 +1,169 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Sunflower from '../components/Sunflower.astro';
+import Memories from '../components/Memories.astro';
+---
+
+<Layout>
+	<main>
+		<header>
+			<h1>Te Amo Mucho, Rafaella</h1>
+			<div class="hearts">
+				<div class="heart"></div>
+				<div class="heart"></div>
+				<div class="heart"></div>
+			</div>
+		</header>
+		
+		<Sunflower />
+		
+		<div class="message">
+			<p>Cada día a tu lado es un regalo que atesoro con todo mi corazón.</p>
+			<p>Eres mi sol, mi alegría y mi amor eshpeshial.</p>
+		</div>
+		
+		<Memories />
+		
+		<footer>
+			<p>Con amor, tu cojudo ❤️</p>
+		</footer>
+	</main>
+</Layout>
+
+<style>
+	main {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
+	
+	header {
+		text-align: center;
+		padding: 2rem 0;
+		position: relative;
+	}
+	
+	h1 {
+		font-size: 4rem;
+		color: var(--color-primary);
+		margin: 0;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+		animation: fadeIn 1.5s ease-out;
+	}
+	
+	.hearts {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		pointer-events: none;
+	}
+	
+	.heart {
+		position: absolute;
+		width: 30px;
+		height: 30px;
+		background-color: var(--color-primary);
+		transform: rotate(45deg);
+		opacity: 0.6;
+		animation: floatHeart 6s ease-in-out infinite;
+	}
+	
+	.heart:before,
+	.heart:after {
+		content: "";
+		position: absolute;
+		width: 30px;
+		height: 30px;
+		background-color: var(--color-primary);
+		border-radius: 50%;
+	}
+	
+	.heart:before {
+		top: -15px;
+		left: 0;
+	}
+	
+	.heart:after {
+		top: 0;
+		left: -15px;
+	}
+	
+	.heart:nth-child(1) {
+		top: 20%;
+		left: 10%;
+		animation-delay: 0s;
+	}
+	
+	.heart:nth-child(2) {
+		top: 30%;
+		right: 15%;
+		animation-delay: 1.5s;
+	}
+	
+	.heart:nth-child(3) {
+		top: 10%;
+		left: 50%;
+		animation-delay: 3s;
+	}
+	
+	.message {
+		text-align: center;
+		margin: 2rem 0;
+		padding: 2rem;
+		background-color: rgba(255, 255, 255, 0.8);
+		border-radius: 15px;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+		animation: fadeIn 2s ease-out;
+	}
+	
+	.message p {
+		font-size: 1.5rem;
+		line-height: 1.6;
+		margin: 1rem 0;
+		color: var(--color-text);
+	}
+	
+	footer {
+		text-align: center;
+		margin-top: auto;
+		padding: 2rem 0;
+		font-size: 1.2rem;
+		color: var(--color-primary);
+	}
+	
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	
+	@keyframes floatHeart {
+		0%, 100% {
+			transform: rotate(45deg) translateY(0);
+		}
+		50% {
+			transform: rotate(45deg) translateY(-20px);
+		}
+	}
+	
+	@media (max-width: 768px) {
+		h1 {
+			font-size: 3rem;
+		}
+		
+		.message p {
+			font-size: 1.2rem;
+		}
+	}
+</style>

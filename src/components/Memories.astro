@@ -1,0 +1,489 @@
+---
+// Datos de ejemplo para las imágenes
+const memories = [
+  {
+      id: 1,
+      title: "Nuestro primer encuentro (Pelicula de Miku)",
+      image: "/images/memoria-1.jpg",
+      description: "El primer día en el que te vi (quede flechado desde el primer momento)"
+    },
+    {
+      id: 2,
+      title: "Tu cumpleaños",
+      image: "/images/memoria-2.jpg",
+      description: "Un día especial en el que celebramos juntos. Fue un día muy memorable."
+    },
+    {
+      id: 3,
+      title: "Gritando a todo pulmon en el concierto de Ado",
+      image: "/images/memoria-3.jpg",
+      description: "Yo moviendo todo para que te sientes a mi lado, me da risa como cierras los ojos en la foto jajajajajaja"
+    },
+    {
+      id: 4,
+      title: "Despues de cine",
+      image: "/images/memoria-4.jpg",
+      description: "Comiendo juntos una riquisima salchipapa (estaba muy buena)"
+    },
+    {
+      id: 5,
+      title: "Cumpleaños de Fer",
+      image: "/images/memoria-5.jpg",
+      description: "Foto tomada mientras jugabamos verdad o reto"
+    },
+    {
+      id: 6,
+      title: "Fan de Ado captada en cara",
+      image: "/images/memoria-6.jpg",
+      description: "Un cosplay de kita, muy hermosa como siempre mi bb"
+    },
+    {
+      id: 7,
+      title: "Mas fotos en la sugoi",
+      image: "/images/memoria-7.jpg",
+      description: "Tu toda introvertida sin querer tomarte fotos, yo tan ´te tomaras la foto quieras o no´"
+    },
+    {
+      id: 8,
+      title: "Kita modo maid",
+      image: "/images/memoria-8.jpg",
+      description: "Mi bb trayendo su comida para luego devorar todo jajajaja"
+    },
+    {
+      id: 9,
+      title: "Uy no, se durmio",
+      image: "/images/memoria-9.jpg",
+      description: "Yo bien pendiente de no pasarnos la estación sin conocerla"
+    },
+    {
+      id: 10,
+      title: "Boca come...",
+      image: "/images/memoria-10.jpg",
+      description: "Tu invitandome a comer para luego comerme"
+    },
+    {
+      id: 11,
+      title: "QEPD Rafaella",
+      image: "/images/memoria-11.jpg",
+      description: "Que hace esta foto aqui?"
+    },
+    {
+      id: 12,
+      title: "Boca come x2",
+      image: "/images/memoria-12.jpg",
+      description: "Comiendo salchipapa juntos"
+    },
+    {
+      id: 13,
+      title: "Primera vez",
+      image: "/images/memoria-13.jpg",
+      description: "Aun recuerdo la primera vez que entraste a mi casa, con mucho miedo jajajajajaja"
+    },
+    {
+      id: 14,
+      title: "Starbuck",
+      image: "/images/memoria-14.jpg",
+      description: "Tomando cafecito en Chile"
+    },
+    {
+      id: 15,
+      title: "Fantasilandia",
+      image: "/images/memoria-15.jpg",
+      description: "Mi bebida estaba bien fea, te tu tan bonita que no me importaba el sabor"
+    },
+    {
+      id: 16,
+      title: "Pataclaun",
+      image: "/images/memoria-16.jpg",
+      description: "El dia que te pude conocer mejor"
+    },
+    {
+      id: 17,
+      title: "Modo bella",
+      image: "/images/memoria-17.jpg",
+      description: "Obra de arte andante captado en camara"
+    },
+    {
+      id: 18,
+      title: "Revancha",
+      image: "/images/memoria-18.jpg",
+      description: "Tu queriendo reinvindicarte de la comida que preparaste en Chile, estaba muy rico la verdad bb"
+    }
+];
+---
+
+<section class="memories-section">
+  <h2>Nuestros Recuerdos</h2>
+  
+  <div class="carousel">
+    <div class="carousel-container">
+      {memories.map(memory => (
+        <div class="memory-card" data-id={memory.id}>
+          <div class="memory-image" style={`background-image: url(${memory.image})`}>
+            <div class="memory-title">{memory.title}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+    <button class="carousel-button prev" aria-label="Anterior">❮</button>
+    <button class="carousel-button next" aria-label="Siguiente">❯</button>
+  </div>
+</section>
+
+<!-- Modal para mostrar la imagen y descripción -->
+<div class="memory-modal" id="memoryModal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <div class="modal-image-container">
+      <img src="" alt="" id="modalImage">
+    </div>
+    <div class="modal-info">
+      <h3 id="modalTitle"></h3>
+      <p id="modalDescription"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Datos de las memorias para el script
+  const memoriesData = [
+    {
+      id: 1,
+      title: "Nuestro primer encuentro (Pelicula de Miku)",
+      image: "/images/memoria-1.jpg",
+      description: "El primer día en el que te vi (quede flechado desde el primer momento)"
+    },
+    {
+      id: 2,
+      title: "Tu cumpleaños",
+      image: "/images/memoria-2.jpg",
+      description: "Un día especial en el que celebramos juntos. Fue un día muy memorable."
+    },
+    {
+      id: 3,
+      title: "Gritando a todo pulmon en el concierto de Ado",
+      image: "/images/memoria-3.jpg",
+      description: "Yo moviendo todo para que te sientes a mi lado, me da risa como cierras los ojos en la foto jajajajajaja"
+    },
+    {
+      id: 4,
+      title: "Despues de cine",
+      image: "/images/memoria-4.jpg",
+      description: "Comiendo juntos una riquisima salchipapa (estaba muy buena)"
+    },
+    {
+      id: 5,
+      title: "Cumpleaños de Fer",
+      image: "/images/memoria-5.jpg",
+      description: "Foto tomada mientras jugabamos verdad o reto"
+    },
+    {
+      id: 6,
+      title: "Fan de Ado captada en cara",
+      image: "/images/memoria-6.jpg",
+      description: "Un cosplay de kita, muy hermosa como siempre mi bb"
+    },
+    {
+      id: 7,
+      title: "Mas fotos en la sugoi",
+      image: "/images/memoria-7.jpg",
+      description: "Tu toda introvertida sin querer tomarte fotos, yo tan ´te tomaras la foto quieras o no´"
+    },
+    {
+      id: 8,
+      title: "Kita modo maid",
+      image: "/images/memoria-8.jpg",
+      description: "Mi bb trayendo su comida para luego devorar todo jajajaja"
+    },
+    {
+      id: 9,
+      title: "Uy no, se durmio",
+      image: "/images/memoria-9.jpg",
+      description: "Yo bien pendiente de no pasarnos la estación sin conocerla"
+    },
+    {
+      id: 10,
+      title: "Boca come...",
+      image: "/images/memoria-10.jpg",
+      description: "Tu invitandome a comer para luego comerme"
+    },
+    {
+      id: 11,
+      title: "QEPD Rafaella",
+      image: "/images/memoria-11.jpg",
+      description: "Que hace esta foto aqui?"
+    },
+    {
+      id: 12,
+      title: "Boca come x2",
+      image: "/images/memoria-12.jpg",
+      description: "Comiendo salchipapa juntos"
+    },
+    {
+      id: 13,
+      title: "Primera vez",
+      image: "/images/memoria-13.jpg",
+      description: "Aun recuerdo la primera vez que entraste a mi casa, con mucho miedo jajajajajaja"
+    },
+    {
+      id: 14,
+      title: "Starbuck",
+      image: "/images/memoria-14.jpg",
+      description: "Tomando cafecito en Chile"
+    },
+    {
+      id: 15,
+      title: "Fantasilandia",
+      image: "/images/memoria-15.jpg",
+      description: "Mi bebida estaba bien fea, te tu tan bonita que no me importaba el sabor"
+    },
+    {
+      id: 16,
+      title: "Pataclaun",
+      image: "/images/memoria-16.jpg",
+      description: "El dia que te pude conocer mejor"
+    },
+    {
+      id: 17,
+      title: "Modo bella",
+      image: "/images/memoria-17.jpg",
+      description: "Obra de arte andante captado en camara"
+    },
+    {
+      id: 18,
+      title: "Revancha",
+      image: "/images/memoria-18.jpg",
+      description: "Tu queriendo reinvindicarte de la comida que preparaste en Chile, estaba muy rico la verdad bb"
+    }
+  ];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.querySelector('.carousel-container');
+    const prevButton = document.querySelector('.carousel-button.prev');
+    const nextButton = document.querySelector('.carousel-button.next');
+    const memoryCards = document.querySelectorAll('.memory-card');
+    const modal = document.getElementById('memoryModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    const closeModal = document.querySelector('.close-modal');
+    
+    let currentIndex = 0;
+    const cardWidth = 250; // Ancho de cada tarjeta + margen
+    
+    // Función para actualizar el carrusel
+    function updateCarousel() {
+      carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    }
+    
+    // Botones de navegación
+    prevButton.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
+    });
+    
+    nextButton.addEventListener('click', () => {
+      if (currentIndex < memoryCards.length - 1) {
+        currentIndex++;
+        updateCarousel();
+      }
+    });
+    
+    // Abrir modal al hacer clic en una tarjeta
+    memoryCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const memoryId = parseInt(card.dataset.id);
+        const memory = memoriesData.find(m => m.id === memoryId);
+        
+        if (memory) {
+          modalImage.src = memory.image;
+          modalImage.alt = memory.title;
+          modalTitle.textContent = memory.title;
+          modalDescription.textContent = memory.description;
+          modal.style.display = 'flex';
+        }
+      });
+    });
+    
+    // Cerrar modal
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+    
+    // Cerrar modal al hacer clic fuera del contenido
+    window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+<style>
+  .memories-section {
+    padding: 3rem 1rem;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: var(--color-primary);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .carousel {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  .carousel-container {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  
+  .memory-card {
+    flex: 0 0 230px;
+    height: 230px;
+    margin: 0 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .memory-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .memory-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  .memory-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    color: white;
+    padding: 1rem;
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s ease;
+  }
+  
+  .carousel-button:hover {
+    background: white;
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+  
+  /* Estilos para el modal */
+  .memory-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .modal-content {
+    background-color: white;
+    border-radius: 15px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+  }
+  
+  @keyframes modalFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-image-container {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+  }
+  
+  .modal-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .modal-info {
+    padding: 1.5rem;
+  }
+  
+  .modal-info h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+  }
+  
+  .modal-info p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+</style>

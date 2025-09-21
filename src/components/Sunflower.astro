@@ -1,0 +1,145 @@
+---
+---
+
+<div class="sunflower-container">
+  <div class="sunflower">
+    <div class="petals">
+      {Array(12).fill(0).map((_, i) => (
+        <div class="petal" style={`--rotation: ${i * 30}deg;`}></div>
+      ))}
+    </div>
+    <div class="center"></div>
+    <div class="stem">
+      <div class="leaf leaf-left"></div>
+      <div class="leaf leaf-right"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sunflower-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    margin: 2rem 0;
+    perspective: 1000px;
+  }
+
+  .sunflower {
+    position: relative;
+    transform-style: preserve-3d;
+    animation: float 6s ease-in-out infinite;
+    width: 80px;
+    height: 80px;
+  }
+
+  .center {
+    width: 80px;
+    height: 80px;
+    background: #654321;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    box-shadow: inset -10px -10px 15px rgba(0, 0, 0, 0.3);
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  .petals {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 80px;
+    transform-style: preserve-3d;
+    animation: rotate 30s linear infinite;
+  }
+
+  .petal {
+    position: absolute;
+    width: 40px;
+    height: 100px;
+    background: var(--color-secondary);
+    top: -60px;
+    left: 20px;
+    border-radius: 50% 50% 0 0;
+    transform-origin: 50% 100%;
+    transform: translate(-50%, 0) rotateZ(var(--rotation)) translateY(-30px) translateX(40px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: open 3s ease-out forwards;
+    opacity: 0;
+  }
+
+  .stem {
+    position: absolute;
+    width: 15px;
+    height: 150px;
+    background: linear-gradient(to right, #228B22, #32CD32);
+    top: 80px;
+    left: 32.5px;
+    z-index: -1;
+    border-radius: 0 0 5px 5px;
+  }
+
+  .leaf {
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    background: #32CD32;
+    border-radius: 50%;
+    top: 50px;
+  }
+
+  .leaf-left {
+    left: -40px;
+    transform: rotate(-20deg);
+  }
+
+  .leaf-right {
+    right: -40px;
+    transform: rotate(20deg);
+  }
+
+  @keyframes open {
+    0% {
+      transform: rotateZ(var(--rotation)) translateY(-30px) scale(0.2);
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: rotateZ(var(--rotation)) translateY(-30px) scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotateZ(0deg);
+    }
+    to {
+      transform: rotateZ(360deg);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+</style>
